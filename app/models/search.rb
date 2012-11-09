@@ -28,7 +28,6 @@ class Search < ActiveRecord::Base
   end
   
   
-  
 private
 
   def find_products

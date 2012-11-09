@@ -1,7 +1,7 @@
 new-search-results-notifier
 ===========================
 
-Example App to let users to perform advanced searches, save them and subscribe to receive new results via email (in development, see DevLog.txt).
+Example App to let users perform advanced searches, save and subscribe to them to receive new results via email (in development, see DevLog.txt).
 
 # Email notification of new results on preferred searches.
 # Search and seed code from https://github.com/railscasts/111-advanced-search-form-revised 
