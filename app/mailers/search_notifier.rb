@@ -1,11 +1,6 @@
 class SearchNotifier < ActionMailer::Base
   default from: "from@example.com"
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.search_notifier.new_search_results_for.subject
-  #
   def new_search_results_for(user)
     @user = user   
     @new_result_sets = new_result_sets_for(@user.searches)
@@ -19,7 +14,7 @@ class SearchNotifier < ActionMailer::Base
   private
   
   
-  # returns hash with searches as keys and their new_results as values
+  # Returns a hash with searches as keys and their new_results as values
   # see Search#new_results 
   def new_result_sets_for(searches)
     new_result_sets = Hash.new

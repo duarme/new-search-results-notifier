@@ -6,6 +6,8 @@ Example App to let users perform advanced searches, save and subscribe to them t
 # Email notification of new results on preferred searches.
 # Search and seed code from https://github.com/railscasts/111-advanced-search-form-revised 
 
+The basic idea behind new search results is that Search has also a notified_at attribute with the timestamp of its last notification, so the find_new_results private method can filter products based on whether they were created or updated after the last notification. See Search#new_results.
+
 - To get started:
 
 cp config/application.example.yml config/application.yml 

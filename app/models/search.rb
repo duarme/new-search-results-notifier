@@ -39,7 +39,9 @@ private
     products
   end  
   
-  def find_new_results 
+  def find_new_results
+    # If a search has never been notified before, since notified_at is nil, 
+    # the time_reference is the search updated_at attribute. 
     time_reference = self.notified_at ? self.notified_at : self.updated_at
     products.where("updated_at >= ?", time_reference)
   end
