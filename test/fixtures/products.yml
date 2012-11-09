@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  category_id :integer
+#  price       :decimal(, )
+#  released_at :date
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  category_id: 1
+  price: 9.99
+  released_at: 2011-11-17
+
+two:
+  name: MyString
+  category_id: 1
+  price: 9.99
+  released_at: 2011-11-17

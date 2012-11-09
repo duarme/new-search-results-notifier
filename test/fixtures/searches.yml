@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: searches
+#
+#  id          :integer          not null, primary key
+#  keywords    :string(255)
+#  category_id :integer
+#  min_price   :decimal(, )
+#  max_price   :decimal(, )
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer          not null
+#  saved       :boolean          default(FALSE), not null
+#  notified    :boolean          default(FALSE), not null
+#  notified_at :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  keywords: MyString
+  category_id: 1
+  min_price: 9.99
+  max_price: 9.99
+
+two:
+  keywords: MyString
+  category_id: 1
+  min_price: 9.99
+  max_price: 9.99
