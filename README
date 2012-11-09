@@ -1,4 +1,15 @@
-= Email notification of new results on preferred searches. 
+new-search-results-notifier
+===========================
+
+Example App to let users to perform advanced searches, save them and subscribe to receive new results via email (in development...).
+
+# Email notification of new results on preferred searches.
+# Search and seed code from https://github.com/railscasts/111-advanced-search-form-revised 
+
+- To get started:
+
+cp config/application.example.yml config/application.yml 
+cp config/database.example.yml config/database.yml
 
 
 

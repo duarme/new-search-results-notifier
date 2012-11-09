@@ -1,0 +1,27 @@
+common: &common
+  adapter: postgresql
+  host: localhost
+  port: 5432 
+  pool: 5
+  encoding: UTF8
+
+development:
+  <<: *common
+  database: your_development_db_name 
+  username: your_username   
+  password: your_password
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000
