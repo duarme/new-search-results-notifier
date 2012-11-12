@@ -22,9 +22,6 @@ Notification is working, TODO:
 -- must chose among delayed_jobs, resque, sidekiq & co.
 -- I'll go with delayed_jobs since is the simplest and doesn't require external dependencies. If needed I'll scale to a more performing solution.
 
-# Delayed_Jobs
-
-- Adding 'gem 'delayed_job_active_record'' to gemfile
 
 - limit daily sends to a given number (default to 200)
 - give user the possibility to define notification delay (deliver if last_send + delay < Time.now) 
