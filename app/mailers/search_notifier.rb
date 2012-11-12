@@ -10,6 +10,7 @@ class SearchNotifier < ActionMailer::Base
     mail to: @user.email, subject:  "[SEARCH_NOTIFIER] There are #{new_results_count} new results for " + 
                                     "#{@new_result_sets.size} of your preferred Searches"
   end
+  handle_asynchronously :new_search_results_for, queue: 'users-preferred-searches-new-results-newsletter'
   
   private
   
