@@ -11,7 +11,7 @@
 #  updated_at  :datetime         not null
 #  user_id     :integer          not null
 #  saved       :boolean          default(FALSE), not null
-#  notified    :boolean          default(FALSE), not null
+#  notify      :boolean          default(FALSE), not null
 #  notified_at :datetime
 #
 

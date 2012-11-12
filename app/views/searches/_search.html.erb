@@ -3,7 +3,7 @@
 <td><%= Category.find(search.category_id).name -%></td>
 <td><%= search.min_price -%> - <%= search.max_price -%></td>
 <td><%= link_to search.products.count, search_path(search) -%></td>
-<td id="notify-toggle-<%=search.id%>"> <%= link_to (search.notified ? "ON" : "OFF"), toggle_notification_search_path(search),
+<td id="notify-toggle-<%=search.id%>"> <%= link_to (search.notify ? "ON" : "OFF"), toggle_notification_search_path(search),
     title: 'Click to toggle mail notification.', remote: true, method: :put %>
 </td>
 <td><%= search.notified_at ? search.notified_at : "none yet" -%></td>

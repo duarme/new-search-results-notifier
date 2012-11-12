@@ -38,8 +38,8 @@ class SearchesController < ApplicationController
   
   def toggle_notification
     @search = Search.find(params[:id])
-    @search.toggle!(:notified)
-    notice = "Mail notification #{@search.notified ? 'activated' : 'deactivated'}."
+    @search.toggle!(:notify)
+    notice = "Mail notification #{@search.notify ? 'activated' : 'deactivated'}."
     respond_to do |format|
       format.html { flash[:notice] = notice; redirect_to searches_path }
       format.js   { flash.now[:notice] = notice }

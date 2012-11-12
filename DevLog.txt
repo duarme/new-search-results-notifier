@@ -6,7 +6,7 @@
 -- Search belongs_to :user
 -- User has_many :searches
 
--- Search new attributes: rails g migration add_user_options_to_searches user_id:integer saved:boolean, notified:boolean, notified_at:timestamp  
+-- Search new attributes: rails g migration add_user_options_to_searches user_id:integer saved:boolean, notify:boolean, notified_at:timestamp  
 
 -- Gmail is good for up to 200 emails/day a lot of other professional services have a pricing shaped on day limit so it would be a good thing to consider this fact in designing the solution.   
 -- alternatives to Gmail are http://www.mailjet.com/, http://sendgrid.com/, and http://mailchimp.com/ .
