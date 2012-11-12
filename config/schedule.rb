@@ -21,9 +21,9 @@ every 2.minutes do
   runner "Search.notify_new_results_by_mail"
 end   
 
-# Clear unsaved searches every first day of every month at 01:00
+# Clear unsaved searches every first day of every month at 03:00 am
 # NB: Search#clear_unsaved is handled by delayed_job 
-# every '0 1 1 * *' do 
+# every '0 3 1 * *' do 
 every 3.minutes do
   runner "Search.clear_unsaved"
 end
