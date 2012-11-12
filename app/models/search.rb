@@ -21,28 +21,26 @@ class Search < ActiveRecord::Base
   
   belongs_to :user
   
-  # class methods
+  # Asyncnchronously handled class methods
   class << self
-    def clear_unsaved
-      Search.where(saved: false).destroy_all
-    end
-    handle_asynchronously :clear_unsaved, queue: 'searches-clear-unsaved' 
-    
     def check_new_results_presence
       searches = Search.where(notify: true).where(new_results_presence: false).order(:new_results_presence_checked_at).limit(CONFIG[:number_of_searches_to_be_checked_for_new_results])
-      searches.each {|s| s.new_results?}
+      searches.each {|s| s.find_new_results}
     end
     handle_asynchronously :clear_unsaved, queue: 'searches-check-new-results-presence'
     
     def notify_new_results_by_mail
-      # fetch all users with searches to be notified 
-      @searches = Search.select('DISTINCT searches.user_id').where(new_results: true).order(:notified_at).limit(CONFIG[:max_daily_emails])
-      @searches.reject_if! {|s| s.find_new_products < 1}
-      # order user searches by notified_at
-      # order users by their last notified search 
-      # notify 200 user
+      # fetch users to be notified
+      searches = Search.select('DISTINCT searches.user_id').where(new_results_presence: true).order(:notified_at).limit(CONFIG[:max_daily_emails])
+      # notify users 
+      searches.each {|s| SearchNotifier.delay(queue: 'searches-newsletters-delivering').new_search_results_for(s.user)}
     end
-    handle_asynchronously :notify 
+    handle_asynchronously :notify_new_results_by_mail, queue: 'searches-newsletters-processing'
+    
+    def clear_unsaved
+      Search.where(saved: false).destroy_all
+    end
+    handle_asynchronously :clear_unsaved, queue: 'searches-clear-unsaved' 
   end
   
   # If a search is to be notified, then it aslo be saved
@@ -64,15 +62,6 @@ class Search < ActiveRecord::Base
   def new_results
     @new_results ||= find_new_results
   end 
-  
-  # returns wheter or not there are new results for this search 
-  # and updates new_results_presence column accordingly
-  def new_results?
-    nrp = new_results > 0
-    self.update_column(:new_results_presence, nrp) if self.new_results != nrp
-    self.touch(:new_results_presence_checked_at)
-    return nr  
-  end
 
   
 private
@@ -91,6 +80,8 @@ private
     # the time_reference is the search updated_at attribute. 
     time_reference = self.notified_at ? self.notified_at : self.updated_at
     products.where("updated_at >= ?", time_reference)
+    self.update_attributes(new_results_presence: products.any?, new_results_presence_checked_at: Time.now) 
+    return products
   end
   
 end
