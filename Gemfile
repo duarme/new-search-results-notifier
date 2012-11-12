@@ -7,6 +7,7 @@ gem 'devise'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'delayed_job_active_record'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,6 +43,5 @@ end
 
 gem 'annotate', ">=2.5.0"
 gem "nifty-generators", :group => :development
-
 
 gem "mocha", :group => :test
