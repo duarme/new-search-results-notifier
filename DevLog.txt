@@ -16,7 +16,7 @@
 
 rails generate mailer SearchNotifier new_search_results_for   
 
-Notification is working, TODO: 
+Notification is working, now I need to
 
 - run it from a cron job every day  
 -- must chose among delayed_jobs, resque, sidekiq & co.
@@ -36,7 +36,7 @@ gem 'whenever', require: false
 # remember to do RVM integration https://github.com/javan/whenever#rvm-integration
 
 
-- limit daily sends to a given number (default to 200)
+TODO
 - give user the possibility to define notification delay (deliver if last_send + delay < Time.now) 
 - performance optimization 
 
