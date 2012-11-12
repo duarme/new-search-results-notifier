@@ -38,7 +38,7 @@ class Search < ActiveRecord::Base
     handle_asynchronously :notify_new_results_by_mail, queue: 'searches-newsletters-processing'
 
     def clear_unsaved
-      Search.where(saved: false).destroy_all
+      Search.where(saved: false).where('updated_at < ?', Time.now - CONFIG[:search_life_in_days].days).destroy_all
     end
     handle_asynchronously :clear_unsaved, queue: 'searches-clear-unsaved' 
   end

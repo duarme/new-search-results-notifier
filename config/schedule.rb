@@ -8,7 +8,8 @@
 set :output, "#{path}/log/cron.log"
 
 # Check searches for new results presence every hour
-# limited by CONFIG[:number_of_searches_to_be_checked_for_new_results]
+# limited by CONFIG[:number_of_searches_to_be_checked_for_new_results] 
+# every 30.minutes do
 every 1.minute do
   runner "Search.check_new_results_presence"  
 end
