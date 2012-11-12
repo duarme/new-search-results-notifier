@@ -27,16 +27,16 @@ class Search < ActiveRecord::Base
       searches = Search.where(notify: true).where(new_results_presence: false).order(:new_results_presence_checked_at).limit(CONFIG[:number_of_searches_to_be_checked_for_new_results])
       searches.each {|s| s.find_new_results}
     end
-    handle_asynchronously :clear_unsaved, queue: 'searches-check-new-results-presence'
-    
+    handle_asynchronously :check_new_results_presence, queue: 'searches-check-new-results-presence'
+
     def notify_new_results_by_mail
-      # fetch users to be notified
-      searches = Search.select('DISTINCT searches.user_id').where(new_results_presence: true).order(:notified_at).limit(CONFIG[:max_daily_emails])
+      # fetch users to be notified    
+      searches = Search.select('DISTINCT searches.user_id, searches.notified_at').where(new_results_presence: true).order(:notified_at).limit(CONFIG[:max_daily_emails])
       # notify users 
       searches.each {|s| SearchNotifier.delay(queue: 'searches-newsletters-delivering').new_search_results_for(s.user)}
     end
     handle_asynchronously :notify_new_results_by_mail, queue: 'searches-newsletters-processing'
-    
+
     def clear_unsaved
       Search.where(saved: false).destroy_all
     end
