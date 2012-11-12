@@ -20,7 +20,20 @@ Notification is working, TODO:
 
 - run it from a cron job every day  
 -- must chose among delayed_jobs, resque, sidekiq & co.
--- I'll go with delayed_jobs since is the simplest and doesn't require external dependencies. If needed I'll scale to a more performing solution.
+-- I'll go with delayed_jobs since is the simplest and doesn't require external dependencies. If needed I'll scale to a more performing solution.          
+
+- Need a process to be called from cron (whenever) which will
+-- fetch the next 200 users with new results to be notified (order by notify_at)
+-- notify them
+-- save a simple report 
+
+gem 'whenever', require: false
+
+➜  new-search-results-notifier[master] ✗ bundle exec wheneverize
+[add] writing `./config/schedule.rb'
+[done] wheneverized!   
+
+# remember to do RVM integration https://github.com/javan/whenever#rvm-integration
 
 
 - limit daily sends to a given number (default to 200)

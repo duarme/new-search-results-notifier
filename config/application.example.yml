@@ -1,2 +1,7 @@
-smtp_username: "example@gmail.com"
+# smtp user_name and password
+smtp_user_name: "example@gmail.com"
 smtp_password: "secret"
+
+# Scheduled Jobs configuration 
+max_daily_emails: 200 
+number_of_searches_to_be_checked_for_new_results: 200
